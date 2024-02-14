@@ -1,5 +1,4 @@
 package PersonAndDate;
-import java.text.SimpleDateFormat;
 
 public class Entity {
 	private String name;
