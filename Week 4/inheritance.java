@@ -181,6 +181,34 @@ public class pack {
 	(object1.getClass() == object2.getClass())
 		
 	
+		
+	• Some authors use the instanceof operator in the definition of equals,
+	instead of using the getClass() method
+	• The instanceof operator checks if an object is of the type given as its second
+	argument
 	
+		obj instanceof ClassName
 	
+	• The instanceof operator will return true if the object being tested is a
+	member of the class for which it is being tested
+
+	Employee e = new Employee("Joe", new Date());
+	HourlyEmployee h = new HourlyEmployee(
+	"Joe", new Date(),8.5, 40);
+	boolean testH = e.equals(h); // h is an instance of e
+	boolean testE = h.equals(e); // e is not an instance of h
+
+
+	• testH will be true, because h is an Employee with the same name and hire
+	date as e
+	• However, testE will be false, because e is not an HourlyEmployee, and
+	cannot be compared to h
+
+	• Summary: Both the instanceof operator and the getClass() method can
+	be used to check the class of an object
+	• However, the getClass() method is more exact
+	◦ The instanceof operator simply tests the class of an object
+	◦ The getClass() method used in a test with == or != tests if two objects
+	were created with the same class
+		
 }
