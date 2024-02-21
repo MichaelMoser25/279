@@ -155,7 +155,14 @@ public class pack {
 	obeyed, which is not good.
 	 */
 		
-		
+
+	// Copy class constructor
+	public Date(Date aDate){
+	month = aDate.month;
+	day = aDate.day;
+	year = aDate.year;
+}
+
 		
 	
 	
