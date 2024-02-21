@@ -161,8 +161,24 @@ public class pack {
 	month = aDate.month;
 	day = aDate.day;
 	year = aDate.year;
-}
 
+	}
+
+	// Equals method for class employee (overriden version)
+	public boolean equals(Object otherObject) {
+		if(otherObject == null)
+			return false;
+		else if(getClass( ) != otherObject.getClass( ))
+			return false;
+		else {
+			Employee otherEmployee = (Employee)otherObject;
+			return (name.equals(otherEmployee.name) && hireDate.equals(otherEmployee.hireDate));
+		}
+	}
+
+	// The results of any two such invocations can be compared with == or != to
+	// determine whether or not they represent the exact same class
+	(object1.getClass() == object2.getClass())
 		
 	
 	
