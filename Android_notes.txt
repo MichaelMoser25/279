@@ -1,0 +1,78 @@
+// Callback Methods
+
+onCreate()
+ Called when the activity is first created.
+ Upon creation enters the Created state.
+ Basic application startup logic are setup once in this onCreate()method.
+o For example, instantiating some global or class-scope variables or bind data to lists etc.
+ This method receives the parameter savedInstanceState, which holds the previous state
+of the activity.
+
+onStart()
+ It is invoked by the system when an activity enters the Started state.
+ The onStart() call makes the activity visible to the user, as the app prepares for the activity
+to enter the foreground and become interactive.
+ This is where the app initializes the code that maintains the UI.
+
+onResume()
+ When the activity enters the Resumed state, it comes to the foreground, and then
+the system invokes the onResume()callback. This is the state in which the app
+interacts with the user.
+ An app remains in this state until an interruptive event occur
+o For instance, user receiving a phone call, the user’s navigating to another
+activity, user switch to another app, or the device screen’s turning off.
+14
+
+
+onPause()
+ Invoked when an interruptive event occurs, and the activity enters the Paused state
+from Resumed state
+
+
+onStop()
+ An activity enters the Stopped state when it is no longer visible to the user. Then the system
+invokes the onStop() callback.
+ For example, when a newly launched activity covers the entire screen.
+ The system may also call onStop()when the activity has finished running and is
+about to be terminated.
+ The app should release almost all resources that aren't needed while the user is not using
+it.
+ In this method, release resources that might leak memory, because it is possible for the
+system to kill the process hosting your activity without calling the activity's final
+onDestroy()callback.
+
+
+
+onDestroy()
+ This is final callback in an activity's lifecycle, which is called before an activity is destroyed.
+ The system either invokes this callback because
+• the activity is finishing when the finish()method is called,
+• or the system is temporarily destroying the process containing the activity to save
+memory.
+ The isFinishing() method is called in onPause() to determine whether the activity
+is closing or is just being paused
+ The onDestroy()callback releases all resources that have not yet been released by earlier
+callbacks such as onStop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
