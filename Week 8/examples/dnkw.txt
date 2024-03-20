@@ -1,1 +1,5 @@
-main
+◦ Given class A, which has public inner class B, which has public inner class C, then
+the following is valid:
+A aObject = new A();
+A.B bObject = aObject.new B();
+A.B.C cObject = bObject.new C();
