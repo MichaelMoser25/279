@@ -1,1 +1,189 @@
+Generic Class
+• So far, when we defined generic classes, we did not put restrictions on the type
+parameter T:
+  public class MyClass<T> {
+    InstanceVariables
+    Methods
+  }
+
+Bounds for Type Parameters
+• Sometimes it makes sense to restrict the possible types that can be plugged in for a
+type parameter T
+• For instance, to ensure that only classes that implement the Comparable interface
+are plugged in for T, define a class as follows:
+
+  public class MyClass<T extends Comparable>
+
+◦ "extends Comparable" serves as a bound on the type parameter T
+◦ Any attempt to plug in a type for T which does not implement the Comparable
+interface will result in a compilation error message
+
+
+public class Pair<T extends Comparable> {
+  private T first;
+  private T second;
+
+  public T Min() {
+    if(first.compareTo(second) <= 0)
+      return first;
+    else
+      return second;
+  }
+}
+
+
+Bounds for Type Parameters
+• A bound on a type may be a class name (rather than an interface name)
+• Then only the bounding class or its descendent classes may be plugged in for the
+type parameters
+
+  public class ExClass<T extends Class1>
+
+◦ Only an object of Class1 or of its descendent class may be plugged in here.
+◦ See Demo TwoTypePair
+• change T1 to T1 extends Employee
+• change the corresponding code in TwoTypePairDemo
+
+
+Bounds for Type Parameters
+• A bounds expression may contain multiple interfaces and up to one class:
+
+public class ExClass<T extends Class1 & InterfaceA & InterfaceB>
+
+◦ In TwoTypePair:
+• change T1 to T1 extends HourlyEmployee & InterfaceA & InterfaceB
+• If there is more than one type parameter, the syntax is as follows:
+
+public class Two<T1 extends Class1, T2 extends Class2 & InterfaceA & InterfaceB>
+
+
+Generic Interfaces
+• An interface can have one or more type parameters
+◦ E.g., public interface Comparable<T>
+• The details and notation are the same as they are for classes with type
+parameters
+
+
+
+Generic Methods
+• When a generic class is defined, the type parameter can be used in the definitions
+of the methods for that generic class
+• In addition, a generic method can be defined that has its own type parameter that
+is not the type parameter of any class
+
+public class Utility {
+  public static <T> T getMidpoint(T[] a) {
+    return a[a.length/2]
+  }
+  public static <T> T getFirst(T[] a) {
+    return a[0];
+  }
+}
+String midString = Utility.<String>getMidpoint(b);
+double firstNumber = Utility.<Double>getFirst(c);
+
+
+Generic Methods
+• In a generic method definition, the type parameter must be placed (in angle
+brackets) after all the modifiers, and before the returned type:
+
+  public static <T> T myMethod(T[] a)
+
+• When a generic method is invoked, the method name is prefaced with the type
+to be plugged in, enclosed in angle brackets:
+
+  String s = NonG.<String>genMethod(c);
+
+
+
+Inheritance with Generic Classes
+• In ordinary classes, an object of the subclass type would also be of the base class
+type
+◦ So if joe is a type of HourlyEmployee, it is also a type of Employee
+◦ And we can plug joe into
+
+  public void myMethod(Employee e1)
+
+• However, given two classes: base class A and inherited class B, and a generic class
+G, there is no relationship between G<A> and G<B>
+
+
+Inheritance with Generic Classes
+• However, given two classes: base class A and inherited class B, and a generic
+class G, there is no relationship between G<A> and G<B>
+• E.g., Consider
+◦ Base class Employee
+◦ Inherited class HourlyEmployee
+• One might think that an object of type ArrayList<HourlyEmployee> is also of
+type ArrayList<Employee>, but this not true.
+◦ So you cannot plug an object that is a type of ArrayList<HourlyEmployee>
+to a method requires the parameter to be ArrayList<Employee>
+
+
+Wildcards
+• So what if we want to define a method that can take both
+ArrayList<HourlyEmployee> and ArrayList<Employee> as
+parameters?
+◦ As discussed above, we cannot do this:
+
+  public void myMethod(ArrayList<Employee> arg1)
+
+• Wildcards: instead, we can use the following method heading, with wildcard ?:
+
+  public void myMethod(ArrayList<?> arg1)
+
+• In the above example the argument can be an ArrayList<T> with any base type
+
+
+Wildcards
+• A bound can be placed on a wildcard specifying that the type used must be an
+ancestor type or descendent type of some class or interface
+
+  public void myMethod(String arg1, ArrayList<? extends Employee> arg2)
+
+• The notation <? extends Employee> specifies that the argument plugged
+in be an object of Employee or of any descendent class of Employee
+• The notation <? super Employee> specifies that the argument plugged in
+be an object of Employee or of any ancestor class of Employee
+
+
+Inheritance with Generic Classes
+• In ordinary classes, an object of the subclass type would also be of the base class
+type
+◦ So if joe is a type of HourlyEmployee, it is also a type of Employee
+◦ And we can plug joe into
+public void myMethod(Employee e1)
+• However, given two classes: A and B, and a generic class G, there is no
+relationship between G<A> and G<B>
+◦ E.g., One might think that an object of type ArrayList<HourlyEmployee> is
+also of type ArrayList<Employee>, but this not true.
+◦ So you cannot plug an object that is a type of ArrayList<HourlyEmployee>
+to a method requires the parameter to be ArrayList<Employee>
+◦ See an example in TwoTypePairDemo
+
+Wildcards
+• So how if we want to define a method that can take both
+ArrayList<HourlyEmployee> and ArrayList<Employee> as
+parameters
+◦ As discussed above, we cannot do this:
+public void myMethod(ArrayList<Employee> arg1)
+• Wildcards: we can instead use the following method heading:
+public void myMethod(ArrayList<?> arg1)
+• In the above example the argument can be an ArrayList<T> with any base
+type
+• See myMethod2 in TwoTypePairDemo
+
+
+Wildcards
+• A bound can be placed on a wildcard specifying that the type used must be an
+ancestor type or descendent type of some class or interface
+
+public void myMethod(String arg1, ArrayList<? extends Employee> arg2)
+
+◦ See myMethod3 in TwoTypePairDemo
+◦ The notation <? extends Employee> specifies that the argument
+plugged in be an object of Employee or of any descendent class of
+Employee
+◦ The notation <? super Employee> specifies that the argument plugged
+in be an object of Employee or of any ancestor class of Employee
 
