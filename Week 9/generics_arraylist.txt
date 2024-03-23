@@ -1,0 +1,230 @@
+// Invoking a method of of outer class
+• If a method is invoked in an inner class
+◦ If the inner class has no such method, then it is assumed to be an invocation of the
+method of that name in the outer class (example: the showBalance method)
+◦ An inner class and its outer class are allowed to have methods with the same
+signature
+◦ If both the inner and outer class have a method with the same signature, then it is
+assumed to be an invocation of the method in the inner class
+◦ If both the inner and outer class have a method with the same signature, and the
+intent is to invoke the method in the outer class, then the following invocation
+must be used:
+
+  OuterClassName.this.methodName()
+
+• The above statements are true when the method is invoked in an inner class. (See
+textbook for more discussions.)
+
+
+• It is legal to nest inner classes within inner classes
+◦ The rules are the same as before, but the names get longer
+◦ Given class A, which has public inner class B, which has public inner class C, then
+the following is valid:
+
+  A aObject = new A();
+  A.B bObject = aObject.new B();
+  A.B.C cObject = bObject.new C();
+
+• Given an OuterClass that has an InnerClass
+◦ Any derived class of OuterClass will automatically have InnerClass as
+an inner class
+
+
+• The syntax we use to create objects of type ArrayList
+
+ArrayList<String> nameList
+ArrayList<Double> markList = new ArrayList<Double>(10);
+ArrayList<Entity> entityList = new ArrayList<Entity>(10);
+= new ArrayList<String>(20);
+
+• The class ArrayList inherits the class AbstractList and implements several
+interfaces
+◦ you can check its API for the details
+• For simplicity for our discussion here, you can simply consider the ArrayList class
+to be defined as:
+
+  public class ArrayList<Base_Type> {
+    InstanceVariables
+    Methods
+  }
+
+public Base_Type set(int index, Base_Type newElement)
+
+public Base_Type get(int index)
+
+
+The ArrayList Class
+• ArrayList is a class in the standard Java libraries
+• In order to make use of the ArrayList class, it must first be imported from the
+package java.util
+• The class ArrayList is implemented using an array as a private instance variable
+• When this hidden array is full, a new larger hidden array is created, and the data is
+automatically transferred to this new array
+◦ So unlike arrays, which have a fixed length once they have been created, an
+ArrayList is an object that can grow and shrink dynamically, while your
+program is running
+◦ This is nice, because you don’t have to worry about hitting the maximum size of
+the list, or wasting too much memory
+
+
+
+Using the ArrayList Class
+• An ArrayList is created and named in the same way as object of any class, except
+that you specify the base type as follows:
+
+  ArrayList<String> aList = new ArrayList<String>();
+
+• Since Java 8.0, you can use the following simplified syntax:
+
+  ArrayList<String> aList = new ArrayList<>();
+
+
+
+
+Mthods to add elements:
+
+public boolean add(Base_Type newElement)
+
+public void add(int index, Base_Type newElement)
+
+
+
+public Base_Type remove(int index)
+
+
+
+
+protected void removeRange(int fromIndex, int toIndex)
+//Deletes all elements with indices i such the fromIndex <= i <= toIndex
+
+
+public boolean remove(Object theElement)
+
+
+public void clear()
+// removes all elements
+
+
+
+public boolean contains(Object target)
+//calls equals method of target to test equality of elements and if it contains
+
+public int indexOf(Object target)
+// returns index of first element that is equal to target. Uses methof equals of object target tot test for equality
+
+
+public int lastIndexOf(Object target)
+// returns index of last element and usues equals method to test of equality in objectt
+
+
+public boolean isEmpty()
+// returns true if calling ArrayList is empty(that is, has size 0) otherwise returns false
+
+
+
+public int size()
+// returns number of elements in calling ArrayList
+
+
+public void ensureCapacity(int newCapacity)
+// increases capacity of calling ArrayList
+
+public void trimToSize()
+// trims capacity of calling ArrayList to its current size. used to save storage space
+
+MAKE A COPY
+public Object[] toArray()
+//returns an array containing all the elements on the list. preserves order of elements
+
+public Type[] toArray(Type[] a)
+
+
+The "For Each" Loop
+• The ArrayList class is an example of a collection class
+• Starting with version 5.0, Java has added a new kind of for loop called a for-each
+loop
+◦ This kind of loop has been designed to cycle through all the elements in a
+collection (like an ArrayList)
+  
+  for (type var : array){
+    // statements using var ;
+  }
+
+◦ See ArrayListDemo class
+
+
+// GENERICS CLASSES
+
+// Single uppercase letters are used for paramaeter
+public class Sample<T> {
+  private T data;
+  public void setData(T newData){
+    data = newData;
+  }
+  public T getData() {
+    return data;
+  }
+}
+
+public class Pair<T> {
+  private T first;
+  private T second;
+
+  // constructor headings do not include type parameter
+  public Pair() {
+    first = null;
+    second = null;
+  }
+
+  public Pair(T firstItem, T secondItem) {
+    first = firstItem;
+    second = secondItem;
+  }
+}
+
+
+Pitfall: A Generic Constructor Name Has No Type Parameter
+• Again, when a generic class is instantiated, the angle brackets < > are used
+
+  Pair<String> pair = new Pair<String>(“Mr. Simpson", "Mrs. Simpson");
+
+• Although the class name in a parameterized class definition has a type parameter
+attached, the type parameter is not used in the heading of the constructor
+definition
+• Use public Pair() but not public Pair<T>()
+
+
+// -----REVIEW CODE EXAMPLES IN SLIDE
+
+Pitfall: A Type Parameter Cannot Be Used Everywhere a Type
+Name Can Be Used
+• Within the definition of a parameterized class definition, there are places where an
+ordinary class name would be allowed, but a type parameter is not allowed
+• In particular, the type parameter cannot be used with the new keyword to create a
+new object
+◦ For instance, the type parameter cannot be used as a constructor name or like a
+constructor:
+  T object = new T(); -------no
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
